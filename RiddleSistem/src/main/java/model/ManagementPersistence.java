@@ -27,11 +27,12 @@ public class ManagementPersistence {
     // Metodo que carga el arbol desde un json
     public BinaryTree loadTree() {
         BinaryTree tree = new BinaryTree();
-        try (FileReader reader = new FileReader("resources/animals.json")) {
+        try (FileReader reader = new FileReader("src\\resources\\animals.json")) {
             Node root = gson.fromJson(reader, Node.class); // Convierte el JSON a un nodo
             tree.setRoot(root);
             System.out.println("Árbol cargado correctamente desde JSON.");
         } catch (IOException e) {
+            System.out.println("Quiza hay algo mal con la ruta");
             e.printStackTrace();
         }
         return tree;
