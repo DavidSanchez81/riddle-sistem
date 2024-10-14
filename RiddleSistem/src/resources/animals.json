@@ -8,7 +8,43 @@
         "answer": "elefante"
       },
       "no": {
-        "answer": "otro mamífero herbívoro"
+        "question": "¿Es un caballo?",
+        "yes": {
+          "answer": "caballo"
+        },
+        "no": {
+          "question": "¿Es un ciervo?",
+          "yes": {
+            "answer": "ciervo"
+          },
+          "no": {
+            "question": "¿Es un rinoceronte?",
+            "yes": {
+              "answer": "rinoceronte"
+            },
+            "no": {
+              "question": "¿Es un búfalo?",
+              "yes": {
+                "answer": "búfalo"
+              },
+              "no": {
+                "question": "¿Es un antílope?",
+                "yes": {
+                  "answer": "antílope"
+                },
+                "no": {
+                  "question": "¿Es una vaca?",
+                  "yes": {
+                    "answer": "vaca"
+                  },
+                  "no": {
+                    "answer": "otro mamífero herbívoro"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "no": {
@@ -19,7 +55,37 @@
           "answer": "león"
         },
         "no": {
-          "answer": "otro mamífero carnívoro"
+          "question": "¿Es un tigre?",
+          "yes": {
+            "answer": "tigre"
+          },
+          "no": {
+            "question": "¿Es un lobo?",
+            "yes": {
+              "answer": "lobo"
+            },
+            "no": {
+              "question": "¿Es un oso?",
+              "yes": {
+                "answer": "oso"
+              },
+              "no": {
+                "question": "¿Es un puma?",
+                "yes": {
+                  "answer": "puma"
+                },
+                "no": {
+                  "question": "¿Es un coyote?",
+                  "yes": {
+                    "answer": "coyote"
+                  },
+                  "no": {
+                    "answer": "otro mamífero carnívoro"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "no": {
@@ -30,7 +96,25 @@
             "answer": "oso"
           },
           "no": {
-            "answer": "otro mamífero omnívoro"
+            "question": "¿Es un cerdo?",
+            "yes": {
+              "answer": "cerdo"
+            },
+            "no": {
+              "question": "¿Es un humano?",
+              "yes": {
+                "answer": "humano"
+              },
+              "no": {
+                "question": "¿Es un mapache?",
+                "yes": {
+                  "answer": "mapache"
+                },
+                "no": {
+                  "answer": "otro mamífero omnívoro"
+                }
+              }
+            }
           }
         },
         "no": {
@@ -41,7 +125,25 @@
               "answer": "canguro"
             },
             "no": {
-              "answer": "otro marsupial"
+              "question": "¿Es un koala?",
+              "yes": {
+                "answer": "koala"
+              },
+              "no": {
+                "question": "¿Es un wombat?",
+                "yes": {
+                  "answer": "wombat"
+                },
+                "no": {
+                  "question": "¿Es un marsupial tigre?",
+                  "yes": {
+                    "answer": "marsupial tigre"
+                  },
+                  "no": {
+                    "answer": "otro marsupial"
+                  }
+                }
+              }
             }
           },
           "no": {
@@ -52,7 +154,25 @@
                 "answer": "mono"
               },
               "no": {
-                "answer": "otro primate"
+                "question": "¿Es un gorila?",
+                "yes": {
+                  "answer": "gorila"
+                },
+                "no": {
+                  "question": "¿Es un chimpancé?",
+                  "yes": {
+                    "answer": "chimpancé"
+                  },
+                  "no": {
+                    "question": "¿Es un babuino?",
+                    "yes": {
+                      "answer": "babuino"
+                    },
+                    "no": {
+                      "answer": "otro primate"
+                    }
+                  }
+                }
               }
             },
             "no": {
@@ -73,17 +193,35 @@
           "answer": "delfín"
         },
         "no": {
-          "answer": "otro mamífero acuático"
+          "question": "¿Es una ballena?",
+          "yes": {
+            "answer": "ballena"
+          },
+          "no": {
+            "question": "¿Es una foca?",
+            "yes": {
+              "answer": "foca"
+            },
+            "no": {
+              "question": "¿Es un manatí?",
+              "yes": {
+                "answer": "manatí"
+              },
+              "no": {
+                "question": "¿Es una nutria?",
+                "yes": {
+                  "answer": "nutria"
+                },
+                "no": {
+                  "answer": "otro mamífero acuático"
+                }
+              }
+            }
+          }
         }
       },
       "no": {
-        "question": "¿Es un pez?",
-        "yes": {
-          "answer": "tiburón"
-        },
-        "no": {
-          "answer": "ballena"
-        }
+        "answer": "otro mamífero"
       }
     },
     "no": {
@@ -92,31 +230,166 @@
         "answer": "murciélago"
       },
       "no": {
-        "question": "¿Es un reptil?",
+        "question": "¿Es un roedor?",
         "yes": {
-          "answer": "cocodrilo"
-        },
-        "no": {
-          "question": "¿Es un ave?",
+          "question": "¿Es una ardilla?",
           "yes": {
-            "question": "¿Es un ave de gran tamaño?",
+            "answer": "ardilla"
+          },
+          "no": {
+            "question": "¿Es un ratón?",
             "yes": {
-              "answer": "águila"
+              "answer": "ratón"
             },
             "no": {
-              "answer": "colibrí"
+              "question": "¿Es una nutria?",
+              "yes": {
+                "answer": "nutria"
+              },
+              "no": {
+                "question": "¿Es un hámster?",
+                "yes": {
+                  "answer": "hámster"
+                },
+                "no": {
+                  "question": "¿Es un jerbo?",
+                  "yes": {
+                    "answer": "jerbo"
+                  },
+                  "no": {
+                    "answer": "otro roedor"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "no": {
+          "question": "¿Es un ungulado?",
+          "yes": {
+            "question": "¿Es una vaca?",
+            "yes": {
+              "answer": "vaca"
+            },
+            "no": {
+              "question": "¿Es un cerdo?",
+              "yes": {
+                "answer": "cerdo"
+              },
+              "no": {
+                "question": "¿Es un caballo?",
+                "yes": {
+                  "answer": "caballo"
+                },
+                "no": {
+                  "question": "¿Es una jirafa?",
+                  "yes": {
+                    "answer": "jirafa"
+                  },
+                  "no": {
+                    "question": "¿Es un ciervo?",
+                    "yes": {
+                      "answer": "ciervo"
+                    },
+                    "no": {
+                      "answer": "otro ungulado"
+                    }
+                  }
+                }
+              }
             }
           },
           "no": {
-            "question": "¿Es un insecto volador?",
+            "question": "¿Es un felino?",
             "yes": {
-              "answer": "mariposa"
+              "question": "¿Es un gato?",
+              "yes": {
+                "answer": "gato"
+              },
+              "no": {
+                "question": "¿Es un león?",
+                "yes": {
+                  "answer": "león"
+                },
+                "no": {
+                  "question": "¿Es un tigre?",
+                  "yes": {
+                    "answer": "tigre"
+                  },
+                  "no": {
+                    "answer": "otro mamífero desconocido"
+                  }
+                }
+              }
             },
             "no": {
-              "answer": "abeja"
+              "answer": "animal desconocido"
             }
           }
         }
+      }
+    }
+  },
+  "nuevas_preguntas": {
+    "question": "¿Es un mamífero marsupial?",
+    "yes": {
+      "question": "¿Es un canguro?",
+      "yes": {
+        "answer": "canguro"
+      },
+      "no": {
+        "question": "¿Es un koala?",
+        "yes": {
+          "answer": "koala"
+        },
+        "no": {
+          "question": "¿Es un wombat?",
+          "yes": {
+            "answer": "wombat"
+          },
+          "no": {
+            "question": "¿Es un marsupial tigre?",
+            "yes": {
+              "answer": "marsupial tigre"
+            },
+            "no": {
+              "answer": "otro marsupial"
+            }
+          }
+        }
+      }
+    },
+    "no": {
+      "question": "¿Es un primate?",
+      "yes": {
+        "question": "¿Es un mono?",
+        "yes": {
+          "answer": "mono"
+        },
+        "no": {
+          "question": "¿Es un gorila?",
+          "yes": {
+            "answer": "gorila"
+          },
+          "no": {
+            "question": "¿Es un chimpancé?",
+            "yes": {
+              "answer": "chimpancé"
+            },
+            "no": {
+              "question": "¿Es un babuino?",
+              "yes": {
+                "answer": "babuino"
+              },
+              "no": {
+                "answer": "otro primate"
+              }
+            }
+          }
+        }
+      },
+      "no": {
+        "answer": "animal desconocido"
       }
     }
   }
