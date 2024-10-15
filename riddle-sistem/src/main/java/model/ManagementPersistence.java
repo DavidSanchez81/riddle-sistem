@@ -46,7 +46,6 @@ public class ManagementPersistence {
             System.out.println("Árbol cargado correctamente desde JSON: " + filePath);
         } catch (IOException e) {
             System.out.println("Error al cargar el árbol desde JSON:");
-            e.printStackTrace();
         }
         return tree;
     }

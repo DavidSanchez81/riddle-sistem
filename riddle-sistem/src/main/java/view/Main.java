@@ -11,7 +11,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         
         // Se carga el árbol desde el archivo JSON
-        BinaryTree tree = persistence.loadTree();
+        BinaryTree tree = persistence.loadTree("");
 
         // Menú principal
         while (true) {
