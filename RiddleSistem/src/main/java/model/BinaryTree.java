@@ -1,13 +1,13 @@
 package model;
+
 import java.util.Scanner;
 
-// Clase que se ejecuta luego de tener ya el arbol cargado desde el archivo JSON
-public class BinaryTree  {
-
+// Clase que se ejecuta luego de tener ya el árbol cargado desde el archivo JSON
+public class BinaryTree {
     private Node root;
 
     public BinaryTree() {
-        root = null; //La raiz empieza en null porque aun no hay una pregunta
+        root = null; // La raíz empieza en null porque aún no hay una pregunta
     }
 
     public void setRoot(Node root) {
@@ -18,19 +18,19 @@ public class BinaryTree  {
         return root;
     }
 
-    //Metodo  utilizado para recorrer el arbol
+    // Método utilizado para recorrer el árbol
     public void changeSon() {
         Node current = root;
         Scanner scanner = new Scanner(System.in);
 
         if (current == null) {
-            System.out.println("El arbol está vacío.");
+            System.out.println("El árbol está vacío.");
             return;
         }
 
-        while (!current.isAnswer()) { // Si el nodo actual  no es una respuesta final
+        while (!current.isAnswer()) { // Si el nodo actual no es una respuesta final
             System.out.println(current.getQuestion()); // Imprime la pregunta actual
-            String answer = scanner.nextLine().toLowerCase(); // la respuesta la parsea a minuscula
+            String answer = scanner.nextLine().toLowerCase(); // la respuesta la parsea a minúscula
 
             if (answer.equals("si")) {
                 current = current.getYes(); // Moverse al hijo "sí"
@@ -43,27 +43,44 @@ public class BinaryTree  {
 
         // Si llegamos a un nodo hoja (en este caso a una respuesta )
         System.out.println("¿Estás pensando en un " + current.getAnswer() + "? (si/no)"); // Imprime el animal correspondiente
-        String answer = scanner.nextLine().toLowerCase(); //parsea a minuscula
+        String answer = scanner.nextLine().toLowerCase(); //parsea a minúscula
 
         if (answer.equals("si")) {
             System.out.println("Animal adivinado con éxito");
         } else {
             System.out.println("No se ha podido adivinar el animal");
+            System.out.println("¿Qué animal estás pensando?");
+            String newAnimal = scanner.nextLine();
+
+            System.out.println("¿Qué pregunta puede diferenciarlo del " + current.getAnswer() + "?");
+            String newQuestion = scanner.nextLine();
+
+            // Crear nuevos nodos para la pregunta y el nuevo animal
+            Node newAnimalNode = new Node(newAnimal);
+            Node currentAnimalNode = new Node(current.getAnswer());
+
+            // Actualizar la estructura del árbol
+            current.setAnswer(null);
+            current.setYes(newAnimalNode);
+            current.setNo(currentAnimalNode);
+            current.setQuestion(newQuestion);
+
+            System.out.println("He aprendido algo nuevo.");
         }
     }
 
-    //Metodos para imprimir el arbol de frma detallada
+    // Método para imprimir el árbol de forma detallada
     public void printTree() {
-        printTree(root, 0); // Se inicia la impresion desde la raiz con el nivel 0
+        printTree(root, 0); // Se inicia la impresión desde la raíz con el nivel 0
     }
 
-    //Metodo recursivo que imprime añadiendo caracteres
+    // Método recursivo que imprime añadiendo caracteres
     private void printTree(Node node, int level) {
         if (node == null) {
             return; // No se imprime nada si el nodo es nulo
         }
 
-        // se añade identacion segun el nivel del nodo
+        // Se añade indentación según el nivel del nodo
         StringBuilder indentation = new StringBuilder();
         for (int i = 0; i < level; i++) {
             indentation.append("   ");
@@ -93,5 +110,38 @@ public class BinaryTree  {
                 System.out.println(indentation + "   └── Hijo 'no': null");
             }
         }
+    }
+
+    // Método para guardar el árbol en un archivo JSON (a implementar)
+    public void saveTreeToJSON(String filePath) {
+        // Implementación para guardar el árbol en formato JSON
+    }
+
+    // Método para buscar un nodo (opcional, a implementar)
+    public boolean searchNode(String answer) {
+        // Implementación de búsqueda en el árbol
+        return searchNode(root, answer);
+    }
+
+    private boolean searchNode(Node node, String answer) {
+        if (node == null) {
+            return false; // Nodo no encontrado
+        }
+        if (node.isAnswer() && node.getAnswer().equalsIgnoreCase(answer)) {
+            return true; // Nodo encontrado
+        }
+        // Recursión en hijos
+        return searchNode(node.getYes(), answer) || searchNode(node.getNo(), answer);
+    }
+
+    // Método para eliminar un nodo (opcional, a implementar)
+    public boolean deleteNode(String answer) {
+        // Implementación para eliminar un nodo
+        return deleteNode(root, answer);
+    }
+
+    private boolean deleteNode(Node node, String answer) {
+        // Lógica para eliminar un nodo
+        return false; // Implementar lógica aquí
     }
 }
