@@ -45,8 +45,8 @@ public class Node {
         return answer;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setAnswer(boolean b) {
+        this.answer = b;
     }
 
     // Método que sirve para saber si el nodo actual es una respuesta final
@@ -88,5 +88,10 @@ public class Node {
     // Método para comprobar si el nodo tiene hijos
     public boolean hasChildren() {
         return yes != null || no != null;
+    }
+
+    public void setAnswer(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAnswer'");
     }
 }
