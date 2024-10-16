@@ -13,7 +13,11 @@ public class Node {
 
     // Constructor para respuestas finales
     public Node(String answer, boolean isAnswer) {
-        this.answer = answer;
+        if (isAnswer) {
+            this.answer = answer;
+        } else {
+            this.question = answer;
+        }
     }
 
     // Getters y Setters
@@ -45,8 +49,8 @@ public class Node {
         return answer;
     }
 
-    public void setAnswer(boolean b) {
-        this.answer = b;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     // Método que sirve para saber si el nodo actual es una respuesta final
@@ -68,30 +72,25 @@ public class Node {
     public String getSummary() {
         StringBuilder summary = new StringBuilder();
         summary.append(this.toString()).append("\n");
-        
+
         // Recursivamente agrega el resumen de los nodos hijos
         if (yes != null) {
             summary.append("  Sí -> ").append(yes.getSummary());
         } else {
             summary.append("  Sí -> null\n");
         }
-        
+
         if (no != null) {
             summary.append("  No -> ").append(no.getSummary());
         } else {
             summary.append("  No -> null\n");
         }
-        
+
         return summary.toString();
     }
 
     // Método para comprobar si el nodo tiene hijos
     public boolean hasChildren() {
         return yes != null || no != null;
-    }
-
-    public void setAnswer(boolean b) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setAnswer'");
     }
 }

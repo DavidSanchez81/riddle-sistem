@@ -60,7 +60,7 @@ public class BinaryTree {
             Node currentAnimalNode = new Node(current.getAnswer());
 
             // Actualizar la estructura del árbol
-            current.setAnswer(false);
+            current.setAnswer(null);
             current.setYes(newAnimalNode);
             current.setNo(currentAnimalNode);
             current.setQuestion(newQuestion);
