@@ -11,7 +11,8 @@ import java.nio.file.Paths;
 
 public class ManagementPersistence {
 
-    public static final String filePath = "../../resources/animals.json";
+    public static final String filePath = "src\\resources\\animals.json";
+
 
     private final Gson gson;
 
@@ -34,7 +35,7 @@ public class ManagementPersistence {
     // Método que carga el árbol desde un JSON con una ruta personalizada
     public BinaryTree loadTree() {
         BinaryTree tree = new BinaryTree();
-
+        System.out.println(filePath);
         if (filePath == null) {
             System.out.println("La ruta del archivo no puede ser nula.");
             return tree;
