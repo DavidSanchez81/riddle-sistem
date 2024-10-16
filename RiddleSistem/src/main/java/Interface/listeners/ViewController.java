@@ -1,7 +1,7 @@
-package view.listeners;
+package Interface.listeners;
 
 
-import view.panels.MainPanel;
+import Interface.panels.MainPanel;
 
 public class ViewController {
    private MainPanel mainPanel;

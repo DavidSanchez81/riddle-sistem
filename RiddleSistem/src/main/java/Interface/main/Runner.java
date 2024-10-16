@@ -1,7 +1,7 @@
-package view.main;
+package Interface.main;
 
 import javax.swing.*;
-import view.panels.PrincipalFrame;
+import Interface.panels.PrincipalFrame;
 
 public class Runner {
     public static void main(String[] args) {
