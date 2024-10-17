@@ -58,6 +58,11 @@ public class GamePanel extends JPanel {
         gbc.insets = new Insets(20, 0, 20, 0);
         add(categoriaPanel, gbc);
 
+        // Configuración del botón "Reiniciar"
+        gbc.gridy = 4;
+        gbc.insets = new Insets(10, 0, 20, 0); // Espaciado adicional para el botón de reinicio
+       // add(botonReiniciar, gbc);
+
         // Configuración general del panel
         setBackground(new Color(50, 43, 45));
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -71,7 +76,7 @@ public class GamePanel extends JPanel {
         // Inicialización de la imagen
         imageLabel = new JLabel();
         ImageIcon imageIcon = new ImageIcon("C:/Users/skson/OneDrive/Pictures/temp/zi.jpg"); // Ruta correcta a la imagen
-        Image scaledImage = imageIcon.getImage().getScaledInstance(480, 290,Image.SCALE_DEFAULT);
+        Image scaledImage = imageIcon.getImage().getScaledInstance(480, 290,Image.SCALE_FAST);
         imageLabel.setIcon(new ImageIcon(scaledImage));
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER); // Centrar imagen dentro del JLabel
         imageLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2)); // Borde blanco
@@ -89,6 +94,7 @@ public class GamePanel extends JPanel {
         questionLabel.setForeground(Color.WHITE);
         questionLabel.setBackground(new Color(50, 43, 45));
         questionLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
     }
 
     private JPanel createButtonPanel(JButton button1, JButton button2, Dimension dimension) {
@@ -112,5 +118,45 @@ public class GamePanel extends JPanel {
         button.setContentAreaFilled(false);
         button.setOpaque(true);
         return button;
+    }
+
+    public JLabel getTitleLabel() {
+        return titleLabel;
+    }
+
+    public void setTitleLabel(JLabel titleLabel) {
+        this.titleLabel = titleLabel;
+    }
+
+    public JLabel getImageLabel() {
+        return imageLabel;
+    }
+
+    public void setImageLabel(JLabel imageLabel) {
+        this.imageLabel = imageLabel;
+    }
+
+    public JButton getBotonSi() {
+        return botonSi;
+    }
+
+    public void setBotonSi(JButton botonSi) {
+        this.botonSi = botonSi;
+    }
+
+    public JButton getBotonNo() {
+        return botonNo;
+    }
+
+    public void setBotonNo(JButton botonNo) {
+        this.botonNo = botonNo;
+    }
+
+    public JTextArea getQuestionLabel() {
+        return questionLabel;
+    }
+
+    public void setQuestionLabel(JTextArea questionLabel) {
+        this.questionLabel = questionLabel;
     }
 }
