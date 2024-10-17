@@ -1,11 +1,12 @@
 package model;
 
+
+
 import java.util.Scanner;
 
 // Clase que se ejecuta luego de tener ya el árbol cargado desde el archivo JSON
 public class BinaryTree {
     private Node root;
-
     public BinaryTree() {
         root = null; // La raíz empieza en null porque aún no hay una pregunta
     }
@@ -30,6 +31,7 @@ public class BinaryTree {
 
         while (!current.isAnswer()) { // Si el nodo actual no es una respuesta final
             System.out.println(current.getQuestion()); // Imprime la pregunta actual
+            getQuestion(current.getQuestion());
             String answer = scanner.nextLine().toLowerCase(); // la respuesta la parsea a minúscula
 
             if (answer.equals("si")) {
@@ -56,14 +58,15 @@ public class BinaryTree {
             String newQuestion = scanner.nextLine();
 
             // Crear nuevos nodos para la pregunta y el nuevo animal
-            Node newAnimalNode = new Node(newAnimal);
-            Node currentAnimalNode = new Node(current.getAnswer());
+            Node newAnimalNode = new Node(newAnimal,true);
+            Node currentAnimalNode = new Node(current.getAnswer(),true);
 
             // Actualizar la estructura del árbol
             current.setAnswer(null);
             current.setYes(newAnimalNode);
             current.setNo(currentAnimalNode);
             current.setQuestion(newQuestion);
+
 
             System.out.println("He aprendido algo nuevo.");
         }
@@ -112,17 +115,6 @@ public class BinaryTree {
         }
     }
 
-    // Método para guardar el árbol en un archivo JSON (a implementar)
-    public void saveTreeToJSON(String filePath) {
-        // Implementación para guardar el árbol en formato JSON
-    }
-
-    // Método para buscar un nodo (opcional, a implementar)
-    public boolean searchNode(String answer) {
-        // Implementación de búsqueda en el árbol
-        return searchNode(root, answer);
-    }
-
     private boolean searchNode(Node node, String answer) {
         if (node == null) {
             return false; // Nodo no encontrado
@@ -134,14 +126,8 @@ public class BinaryTree {
         return searchNode(node.getYes(), answer) || searchNode(node.getNo(), answer);
     }
 
-    // Método para eliminar un nodo (opcional, a implementar)
-    public boolean deleteNode(String answer) {
-        // Implementación para eliminar un nodo
-        return deleteNode(root, answer);
+    public String getQuestion(String question){
+        return question;
     }
 
-    private boolean deleteNode(Node node, String answer) {
-        // Lógica para eliminar un nodo
-        return false; // Implementar lógica aquí
-    }
 }

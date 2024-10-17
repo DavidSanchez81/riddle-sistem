@@ -1,6 +1,6 @@
 package Interface.panels;
 
-import Interface.listeners.ViewController;
+import Interface.controller.ViewController;
 
 import javax.swing.*;
 
