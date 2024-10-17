@@ -6,9 +6,6 @@ import model.ManagementPersistence;
 import model.Node;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class ListenersGamePanel {
     private final ViewController viewController;
     private BinaryTree binaryTree;
@@ -69,7 +66,7 @@ public class ListenersGamePanel {
         if (currentNode != null && currentNode.isAnswer()) {
             if (isYes) {
                 // El jugador ha confirmado que adivinamos correctamente el animal
-                JOptionPane.showMessageDialog(null, "¡Correcto! Has adivinado el animal: " + currentNode.getAnswer(), "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "¡Se ha  adivinado el animal! : " + currentNode.getAnswer(), "Resultado", JOptionPane.INFORMATION_MESSAGE);
                 resetGame(); // Reiniciar el juego después de adivinar correctamente
             } else {
                 // El jugador ha indicado que no adivinamos correctamente el animal
@@ -94,11 +91,28 @@ public class ListenersGamePanel {
 
         // Añadir listener al botón de aceptar del panel de agregar
         viewController.getMainPanel().getAddPanel().getAcceptButton().addActionListener(e -> {
-            // Reiniciar el juego después de agregar el nuevo animal
-            JOptionPane.showMessageDialog(null, "Reiniciando el juego...", "Información", JOptionPane.INFORMATION_MESSAGE);
-            viewController.getMainPanel().getAddPanel().setVisible(false);
-            viewController.getMainPanel().getGamePanel().setVisible(true);
-            resetGame(); // Reiniciar el juego
+           String animal = viewController.getMainPanel().getAddPanel().getAnimalField().getText().toLowerCase().trim();
+           String question = viewController.getMainPanel().getAddPanel().getQuestionField().getText().toLowerCase().trim();
+           if(animal.isEmpty()||question.isEmpty()){
+               JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px;'>Por favor rellene todos los campos.</p></html>", "Error", JOptionPane.ERROR_MESSAGE);
+           }else {
+               // Crear nuevos nodos para la pregunta y el nuevo animal
+               Node newAnimalNode = new Node(animal,true);
+               Node currentAnimalNode = new Node(currentNode.getAnswer(),true);
+
+               // Actualizar la estructura del árbol
+               currentNode.setAnswer(null);
+               currentNode.setYes(newAnimalNode);
+               currentNode.setNo(currentAnimalNode);
+               currentNode.setQuestion(question);
+               // Reiniciar el juego después de agregar el nuevo animal
+               JOptionPane.showMessageDialog(null, "Informacion guardada con exito . Reiniciando el juego...", "Información", JOptionPane.INFORMATION_MESSAGE);
+               viewController.getMainPanel().getAddPanel().getAnimalField().setText("");
+               viewController.getMainPanel().getAddPanel().getQuestionField().setText("");
+               viewController.getMainPanel().getAddPanel().setVisible(false);
+               viewController.getMainPanel().getGamePanel().setVisible(true);
+               resetGame(); // Reiniciar el juego
+           }
         });
     }
 }
