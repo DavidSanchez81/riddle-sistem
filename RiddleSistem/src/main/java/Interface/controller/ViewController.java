@@ -1,21 +1,21 @@
 package Interface.controller;
 
-
-import Interface.controller.listeners.Test;
+import Interface.controller.listeners.ListenersGamePanel;
 import Interface.panels.MainPanel;
+import model.BinaryTree;
+import model.ManagementPersistence;
 
 public class ViewController {
    private MainPanel mainPanel;
-   private Test test;
-
+   private ListenersGamePanel listenersGamePanel;
 
    public ViewController(){
-      this.mainPanel = new MainPanel();
-      this.test = new Test(this);
+      this.mainPanel = new MainPanel(); // Inicializa el panel principal
+      this.listenersGamePanel = new ListenersGamePanel(this); // Pasa el árbol cargado al listener
    }
 
-   //Getter
    public MainPanel getMainPanel() {
       return mainPanel;
    }
+
 }
