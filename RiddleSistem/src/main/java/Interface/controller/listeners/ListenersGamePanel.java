@@ -4,6 +4,10 @@ import Interface.controller.ViewController;
 import model.BinaryTree;
 import model.ManagementPersistence;
 import model.Node;
+import view.Main;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 public class ListenersGamePanel {
@@ -88,6 +92,20 @@ public class ListenersGamePanel {
     private void changeVisibility() {
         viewController.getMainPanel().getGamePanel().setVisible(false); // Ocultar panel de juego
         viewController.getMainPanel().getAddPanel().setVisible(true); // Mostrar panel de agregar
+        // Añadir KeyBinding para Ctrl + 9
+        InputMap inputMap = viewController.getMainPanel().getAddPanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = viewController.getMainPanel().getAddPanel().getActionMap();
+
+        // Vincular la combinación de teclas Ctrl + 9 con la acción
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_9, KeyEvent.CTRL_DOWN_MASK), "control9Pressed");
+
+        // Definir la acción que ocurrirá cuando se presione Ctrl + 9
+        actionMap.put("control9Pressed", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                binaryTree.printTree();
+            }
+        });
 
         // Añadir listener al botón de aceptar del panel de agregar
         viewController.getMainPanel().getAddPanel().getAcceptButton().addActionListener(e -> {
