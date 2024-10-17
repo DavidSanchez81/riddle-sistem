@@ -74,43 +74,36 @@ public class BinaryTree {
 
     // Método para imprimir el árbol de forma detallada
     public void printTree() {
-        printTree(root, 0); // Se inicia la impresión desde la raíz con el nivel 0
+        printTree(root, 0, ""); // Se inicia desde la raíz con el nivel 0 y sin prefijo
     }
 
-    // Método recursivo que imprime añadiendo caracteres
-    private void printTree(Node node, int level) {
+    // Método recursivo que imprime añadiendo caracteres de estructura
+    private void printTree(Node node, int level, String prefix) {
         if (node == null) {
-            return; // No se imprime nada si el nodo es nulo
+            System.out.println(prefix + "null");
+            return;
         }
 
-        // Se añade indentación según el nivel del nodo
-        StringBuilder indentation = new StringBuilder();
-        for (int i = 0; i < level; i++) {
-            indentation.append("   ");
-        }
-
-        // Se verifica si es un nodo hoja o una pregunta
+        // Imprime el nivel y la pregunta o respuesta del nodo
         if (node.isAnswer()) {
-            // Si es una hoja, imprime el animal
-            System.out.println(indentation + "Nivel " + level + ": [Animal] " + node.getAnswer());
+            System.out.println(prefix + "Nivel " + level + ": [Animal] " + node.getAnswer());
         } else {
-            // Si es una pregunta, imprime la pregunta
-            System.out.println(indentation + "Nivel " + level + ": [Pregunta] " + node.getQuestion());
+            System.out.println(prefix + "Nivel " + level + ": [Pregunta] " + node.getQuestion());
 
-            // Imprime el hijo "sí"
+            // Manejar el hijo "sí" (izquierda)
             if (node.getYes() != null) {
-                System.out.println(indentation + "   ├── Hijo 'sí':");
-                printTree(node.getYes(), level + 1); // Llama recursivamente para el hijo "sí"
+                System.out.println(prefix + "   ├── Hijo 'sí':");
+                printTree(node.getYes(), level + 1, prefix + "   │   "); // Llamada recursiva
             } else {
-                System.out.println(indentation + "   ├── Hijo 'sí': null");
+                System.out.println(prefix + "   ├── Hijo 'sí': null");
             }
 
-            // Imprime el hijo "no"
+            // Manejar el hijo "no" (derecha)
             if (node.getNo() != null) {
-                System.out.println(indentation + "   └── Hijo 'no':");
-                printTree(node.getNo(), level + 1); // Llama recursivamente para el hijo "no"
+                System.out.println(prefix + "   └── Hijo 'no':");
+                printTree(node.getNo(), level + 1, prefix + "       "); // Llamada recursiva
             } else {
-                System.out.println(indentation + "   └── Hijo 'no': null");
+                System.out.println(prefix + "   └── Hijo 'no': null");
             }
         }
     }
