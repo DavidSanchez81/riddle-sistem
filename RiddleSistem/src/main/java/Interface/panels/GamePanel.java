@@ -5,158 +5,120 @@ import java.awt.*;
 
 public class GamePanel extends JPanel {
 
-    private JLabel titleLabel, imageLabel;
-    private JButton botonSi, botonNo;
-    private JTextArea questionLabel;
+    // Componentes de la interfaz
+    private JLabel titleLabel; // Etiqueta para el título
+    private JButton botonSi, botonNo; // Botones para las respuestas
+    private JTextArea questionLabel; // Área de texto para mostrar la pregunta
+    private JLabel gifLabel; // Etiqueta para mostrar el GIF
 
+    // Constructor
     public GamePanel() {
-        initializeComponents();
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        initializeComponents(); // Inicializa los componentes de la interfaz
+        setLayout(new GridBagLayout()); // Establece GridBagLayout como el layout del panel
+        GridBagConstraints gbc = new GridBagConstraints(); // Crea un objeto GridBagConstraints para organizar el layout
+        gbc.weightx = 1; // Expande horizontalmente los componentes
+        gbc.weighty = 1; // Expande verticalmente los componentes
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Ocupa todo el espacio horizontalmente
 
-        // Dimensiones para botones
-        Dimension buttonDimension = new Dimension(80, 40);
+        Dimension buttonDimension = new Dimension(80, 40); // Dimensiones para los botones
 
         // Configuración del título
-        titleLabel.setPreferredSize(new Dimension(260, 50));
-        titleLabel.setForeground(new Color(246, 171, 73));
-        titleLabel.setOpaque(true);
-        titleLabel.setBackground(new Color(70, 60, 61));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
-        titleLabel.setFont(new Font("Lato", Font.BOLD, 28));
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(20, 0, 5, 0);
-        add(titleLabel, gbc);
+        titleLabel.setPreferredSize(new Dimension(200, 50)); // Define el tamaño preferido del título
+        titleLabel.setForeground(new Color(246, 171, 73)); // Establece el color del texto del título
+        titleLabel.setOpaque(true); // Permite que el color de fondo sea visible
+        titleLabel.setBackground(new Color(70, 60, 61)); // Color de fondo del título
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(4, 0, 5, 0)); // Borde vacío alrededor del título
+        titleLabel.setFont(new Font("Verdana", Font.BOLD, 25)); // Define la fuente del título
+        gbc.gridx = 0; // Posición del título en la columna 0
+        gbc.gridy = 0; // Posición del título en la fila 0
+        gbc.gridwidth = 2; // El título ocupará dos columnas
+        gbc.anchor = GridBagConstraints.CENTER; // Centra el título
+        gbc.insets = new Insets(20, 0, 5, 0); // Añade espacio alrededor del título
+        add(titleLabel, gbc); // Añade el título al panel
 
-        // Configuración de la imagen sobre la pregunta
-        gbc.gridy = 1;
-        gbc.gridwidth = 2; // Abarcar las dos columnas
-        gbc.weightx = 1;
-        gbc.weighty = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.NONE; // Evita expansión
-        gbc.insets = new Insets(0, 0, 10, 0);
-        add(imageLabel, gbc);
+        // Añadir GIF debajo del título
+        ImageIcon gifIcon = new ImageIcon("C:\\Users\\skson\\OneDrive\\Documents\\Sistema Adivinanzas\\RiddleSistem\\src\\resources\\llama.gif"); // Cargar el GIF
+        gifLabel = new JLabel(gifIcon); // Crear etiqueta para el GIF
+        gbc.gridx = 1;
+        gbc.gridy = 2; // Posicionar el GIF en la segunda fila
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(7, 0, 8, 0); // Ajustar los márgenes para el GIF
+        add(gifLabel, gbc); // Añadir GIF al panel
 
-        // Configuración del JTextArea con JScrollPane para la pregunta
-        JScrollPane scrollPane = new JScrollPane(questionLabel);
-        scrollPane.setPreferredSize(new Dimension(300, 100));
-        scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        gbc.gridy = 2;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        add(scrollPane, gbc);
+        // Añadir área de texto para la pregunta
+        JScrollPane scrollPane = new JScrollPane(questionLabel); // Envolver el área de texto en un JScrollPane
+        scrollPane.setPreferredSize(new Dimension(400, 100)); // Ajustar tamaño de la pregunta
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Añadir borde negro
+        gbc.gridy = 2; // Posicionar área de texto en la tercera fila
+        gbc.insets = new Insets(4, 10, 5, 10); // Ajustar los márgenes
+        add(scrollPane, gbc); // Añadir al panel
 
-        // Configuración de los botones "Sí" y "No"
-        JPanel categoriaPanel = createButtonPanel(botonSi, botonNo, buttonDimension);
-        gbc.gridy = 3;
-        gbc.insets = new Insets(20, 0, 20, 0);
-        add(categoriaPanel, gbc);
+        // Panel para los botones "Sí" y "No"
+        JPanel categoriaPanel = createButtonPanel(botonSi, botonNo, buttonDimension); // Crear panel para los botones
+        gbc.gridy = 3; // Posicionar el panel de botones en la cuarta fila
+        gbc.insets = new Insets(10, 0, 20, 0); // Ajustar los márgenes
+        add(categoriaPanel, gbc); // Añadir el panel de botones al panel principal
 
-        // Configuración del botón "Reiniciar"
-        gbc.gridy = 4;
-        gbc.insets = new Insets(10, 0, 20, 0); // Espaciado adicional para el botón de reinicio
-       // add(botonReiniciar, gbc);
-
-        // Configuración general del panel
-        setBackground(new Color(50, 43, 45));
-        setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        // Configuración general del panel principal
+        setBackground(new Color(50, 43, 45)); // Fondo del panel
+        setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Borde negro del panel
     }
 
+    // Método para inicializar los componentes
     private void initializeComponents() {
-        // Inicialización del título
-        titleLabel = new JLabel("Riddle System", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Lato", Font.BOLD, 28));
+        titleLabel = new JLabel("Riddle System", SwingConstants.CENTER); // Crear el título y centrarlo
+        titleLabel.setFont(new Font("Lato", Font.BOLD, 30)); // Fuente del título
 
-        // Inicialización de la imagen
-        imageLabel = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("C:/Users/skson/OneDrive/Pictures/temp/zi.jpg"); // Ruta correcta a la imagen
-        Image scaledImage = imageIcon.getImage().getScaledInstance(480, 290,Image.SCALE_FAST);
-        imageLabel.setIcon(new ImageIcon(scaledImage));
-        imageLabel.setHorizontalAlignment(SwingConstants.CENTER); // Centrar imagen dentro del JLabel
-        imageLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2)); // Borde blanco
+        botonSi = createStyledButton("Sí", new Dimension(80, 40)); // Crear botón "Sí"
+        botonNo = createStyledButton("No", new Dimension(80, 40)); // Crear botón "No"
 
-        // Inicialización de los botones
-        botonSi = createStyledButton("Sí", new Dimension(80, 40));
-        botonNo = createStyledButton("No", new Dimension(80, 40));
-
-        // Inicialización del JTextArea para la pregunta
-        questionLabel = new JTextArea("¿La tierra es plana?");
-        questionLabel.setLineWrap(true);
-        questionLabel.setWrapStyleWord(true);
-        questionLabel.setEditable(false);
-        questionLabel.setFont(new Font("Montserrat", Font.PLAIN, 18));
-        questionLabel.setForeground(Color.WHITE);
-        questionLabel.setBackground(new Color(50, 43, 45));
-        questionLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
+        // Configuración del área de texto para la pregunta
+        questionLabel = new JTextArea("¿La tierra es plana?"); // Pregunta predeterminada
+        questionLabel.setLineWrap(true); // Ajustar texto en líneas
+        questionLabel.setWrapStyleWord(true); // Ajustar líneas por palabras
+        questionLabel.setEditable(false); // Área de texto no editable
+        questionLabel.setFont(new Font("Montserrat", Font.PLAIN, 24)); // Fuente del texto
+        questionLabel.setForeground(Color.WHITE); // Texto en blanco
+        questionLabel.setBackground(new Color(50, 43, 45)); // Fondo oscuro
+        questionLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Borde vacío
     }
 
+    // Crear panel para los botones "Sí" y "No"
     private JPanel createButtonPanel(JButton button1, JButton button2, Dimension dimension) {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
-        panel.setOpaque(false);
-        button1.setPreferredSize(dimension);
-        button2.setPreferredSize(dimension);
-        panel.add(button1);
-        panel.add(button2);
-        return panel;
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0)); // Panel con FlowLayout centrado
+        panel.setOpaque(false); // Panel transparente
+        button1.setPreferredSize(dimension); // Tamaño del botón "Sí"
+        button2.setPreferredSize(dimension); // Tamaño del botón "No"
+        panel.add(button1); // Añadir botón "Sí"
+        panel.add(button2); // Añadir botón "No"
+        return panel; // Devolver panel con botones
     }
 
+    // Método para crear un botón con estilo
     private JButton createStyledButton(String text, Dimension dimension) {
-        JButton button = new JButton(text);
-        button.setPreferredSize(dimension);
-        button.setFont(new Font("Montserrat", Font.BOLD, 16));
-        button.setForeground(Color.WHITE);
-        button.setBackground(new Color(70, 60, 61));
-        button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        button.setContentAreaFilled(false);
-        button.setOpaque(true);
-        return button;
+        JButton button = new JButton(text); // Crear botón con texto
+        button.setPreferredSize(dimension); // Establecer tamaño
+        button.setFont(new Font("Montserrat", Font.BOLD, 16)); // Fuente del botón
+        button.setForeground(Color.WHITE); // Texto en blanco
+        button.setBackground(new Color(70, 60, 61)); // Fondo oscuro
+        button.setFocusPainted(false); // Sin borde de foco
+        button.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Borde negro
+        button.setContentAreaFilled(false); // Estilo plano
+        button.setOpaque(true); // Fondo visible
+        return button; // Devolver botón
     }
 
-    public JLabel getTitleLabel() {
-        return titleLabel;
-    }
-
-    public void setTitleLabel(JLabel titleLabel) {
-        this.titleLabel = titleLabel;
-    }
-
-    public JLabel getImageLabel() {
-        return imageLabel;
-    }
-
-    public void setImageLabel(JLabel imageLabel) {
-        this.imageLabel = imageLabel;
-    }
-
+    // Métodos getter para acceder a los componentes
     public JButton getBotonSi() {
-        return botonSi;
-    }
-
-    public void setBotonSi(JButton botonSi) {
-        this.botonSi = botonSi;
+        return botonSi; // Devolver botón "Sí"
     }
 
     public JButton getBotonNo() {
-        return botonNo;
-    }
-
-    public void setBotonNo(JButton botonNo) {
-        this.botonNo = botonNo;
+        return botonNo; // Devolver botón "No"
     }
 
     public JTextArea getQuestionLabel() {
-        return questionLabel;
+        return questionLabel; // Devolver área de texto de la pregunta
     }
 
-    public void setQuestionLabel(JTextArea questionLabel) {
-        this.questionLabel = questionLabel;
-    }
 }
