@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class ListenersGamePanel {
     private final ViewController viewController;
-    private BinaryTree binaryTree;
+    private final BinaryTree binaryTree;
     private Node currentNode;
 
     public ListenersGamePanel(ViewController viewController) {
