@@ -66,7 +66,7 @@ public class ListenersGamePanel {
         if (currentNode != null && currentNode.isAnswer()) {
             if (isYes) {
                 // El jugador ha confirmado que adivinamos correctamente el animal
-                JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px; color:green;'>¡ Se adivino el animal con exito ! : " + currentNode.getAnswer() + "</p></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px; color:black;'>¡ Se adivino el animal con exito ! : " + currentNode.getAnswer() + "</p></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 resetGame(); // Reiniciar el juego después de adivinar correctamente
             } else {
                 // El jugador ha indicado que no adivinamos correctamente el animal
@@ -112,29 +112,46 @@ public class ListenersGamePanel {
             //Extraer los textos actuales de los field
             String animal = viewController.getMainPanel().getAddPanel().getAnimalField().getText().toLowerCase().trim();
             String question = viewController.getMainPanel().getAddPanel().getQuestionField().getText().toLowerCase().trim();
-            if(animal.isEmpty()||question.isEmpty()){ //Verificar que tengan contenido
-                JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px;'>Por favor rellene todos los campos.</p></html>", "Error", JOptionPane.ERROR_MESSAGE);
-            }else {
+
+            if (animal.isEmpty() && question.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px;'>Por favor, rellene todos los campos.</p></html>", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (animal.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px;'>Por favor, rellene el campo de animal.</p></html>", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (question.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px;'>Por favor, rellene el campo de pregunta.</p></html>", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (!question.endsWith("?")) {
+                JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px;'>Por favor, ingrese una pregunta válida (debe terminar con un signo de interrogación).</p></html>", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
                 // Crear nuevos nodos para la pregunta y el nuevo animal
-                Node newAnimalNode = new Node(animal,true);
-                Node currentAnimalNode = new Node(currentNode.getAnswer(),true);
+                Node newAnimalNode = new Node(animal, true);
+                Node currentAnimalNode = new Node(currentNode.getAnswer(), true);
+
                 // Actualizar la estructura del árbol
                 currentNode.setAnswer(null);
                 currentNode.setYes(newAnimalNode);
                 currentNode.setNo(currentAnimalNode);
                 currentNode.setQuestion(question);
+
                 // Reiniciar el juego después de agregar el nuevo animal
-                JOptionPane.showMessageDialog(null, "Informacion guardada con exito . Reiniciando el juego...", "Información", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Información guardada con éxito. Reiniciando el juego...", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+                // Limpiar los campos
                 viewController.getMainPanel().getAddPanel().getAnimalField().setText("");
                 viewController.getMainPanel().getAddPanel().getQuestionField().setText("");
                 viewController.getMainPanel().getAddPanel().setVisible(false);
                 viewController.getMainPanel().getGamePanel().setVisible(true);
+
                 resetGame(); // Reiniciar el juego
             }
         });
         listenerCancelButton();
     }
-
+    private  boolean isQuestion(String texto) {
+        if (texto == null || texto.isEmpty()) {
+            return false; // Devuelve false si el texto es nulo o vacío
+        }
+        return texto.trim().endsWith("?"); // Devuelve true si termina con '?'
+    }
     private void listenerCancelButton(){
         viewController.getMainPanel().getAddPanel().getCancelButton().addActionListener(e -> {
             viewController.getMainPanel().getAddPanel().getAnimalField().setText("");
