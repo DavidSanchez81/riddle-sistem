@@ -23,40 +23,57 @@ public class GamePanel extends JPanel {
         Dimension buttonDimension = new Dimension(80, 40); // Dimensiones para los botones
 
         // Configuración del título
-        titleLabel.setPreferredSize(new Dimension(200, 50)); // Define el tamaño preferido del título
+        titleLabel.setPreferredSize(new Dimension(400, 50)); // Aumentar el tamaño para que ocupe más espacio
         titleLabel.setForeground(new Color(246, 171, 73)); // Establece el color del texto del título
         titleLabel.setOpaque(true); // Permite que el color de fondo sea visible
         titleLabel.setBackground(new Color(70, 60, 61)); // Color de fondo del título
         titleLabel.setBorder(BorderFactory.createEmptyBorder(4, 0, 5, 0)); // Borde vacío alrededor del título
         titleLabel.setFont(new Font("Verdana", Font.BOLD, 25)); // Define la fuente del título
-        gbc.gridx = 0; // Posición del título en la columna 0
+        gbc.gridx = 0; // Asegurar que el título comience en la columna 0
         gbc.gridy = 0; // Posición del título en la fila 0
-        gbc.gridwidth = 2; // El título ocupará dos columnas
+        gbc.gridwidth = 3; // Hacer que el título ocupe tres columnas (todo el ancho)
         gbc.anchor = GridBagConstraints.CENTER; // Centra el título
         gbc.insets = new Insets(20, 0, 5, 0); // Añade espacio alrededor del título
         add(titleLabel, gbc); // Añade el título al panel
 
-        // Añadir GIF debajo del título
+        // Añadir el GIF entre el título y la pregunta
         ImageIcon gifIcon = new ImageIcon("C:\\Users\\skson\\OneDrive\\Documents\\Sistema Adivinanzas\\RiddleSistem\\src\\resources\\llama.gif"); // Cargar el GIF
         gifLabel = new JLabel(gifIcon); // Crear etiqueta para el GIF
-        gbc.gridx = 1;
-        gbc.gridy = 2; // Posicionar el GIF en la segunda fila
-        gbc.anchor = GridBagConstraints.EAST;
-        gbc.insets = new Insets(7, 0, 8, 0); // Ajustar los márgenes para el GIF
+        gbc.gridx = 0; // Colocar el GIF en la columna 0
+        gbc.gridy = 1; // Colocar el GIF en la fila 1 (entre título y pregunta)
+        gbc.gridwidth = 3; // Hacer que el GIF ocupe tres columnas
+        gbc.anchor = GridBagConstraints.CENTER; // Centrar el GIF
+        gbc.insets = new Insets(10, 0, 10, 0); // Ajustar los márgenes para el GIF
         add(gifLabel, gbc); // Añadir GIF al panel
 
         // Añadir área de texto para la pregunta
-        JScrollPane scrollPane = new JScrollPane(questionLabel); // Envolver el área de texto en un JScrollPane
+        JPanel textPanel = new JPanel(new GridBagLayout()); // Panel para centrar el área de texto
+        GridBagConstraints gbcText = new GridBagConstraints(); // Configuración para centrar el JTextArea
+        gbcText.gridx = 0;
+        gbcText.gridy = 0;
+        gbcText.anchor = GridBagConstraints.CENTER; // Centrar el JTextArea
+        textPanel.add(questionLabel, gbcText); // Añadir el JTextArea al panel
+
+        textPanel.setBackground(new Color(50, 43, 45)); // Fondo oscuro del panel para que coincida con el JTextArea
+
+        JScrollPane scrollPane = new JScrollPane(textPanel); // Envolver el panel en un JScrollPane
         scrollPane.setPreferredSize(new Dimension(400, 110)); // Ajustar tamaño de la pregunta
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Añadir borde negro
+
+        // Colocar el JScrollPane en el panel principal
+        gbc.gridx = 0; // Posicionar el panel en la columna 0
         gbc.gridy = 2; // Posicionar área de texto en la tercera fila
-        gbc.insets = new Insets(4, 10, 5, 10); // Ajustar los márgenes
-        add(scrollPane, gbc); // Añadir al panel
+        gbc.gridwidth = 2; // Hacer que ocupe dos columnas (ajusta según el espacio necesario)
+        gbc.insets = new Insets(4, 10, 3, 10); // Ajustar los márgenes
+        add(scrollPane, gbc); // Añadir al panel principal
 
         // Panel para los botones "Sí" y "No"
         JPanel categoriaPanel = createButtonPanel(botonSi, botonNo, buttonDimension); // Crear panel para los botones
+        gbc.gridx = 0; // Centrar el panel de botones en la columna 0
         gbc.gridy = 3; // Posicionar el panel de botones en la cuarta fila
+        gbc.gridwidth = 3; // Hacer que el panel ocupe tres columnas
         gbc.insets = new Insets(10, 0, 20, 0); // Ajustar los márgenes
+        gbc.anchor = GridBagConstraints.CENTER; // Centrar los botones
         add(categoriaPanel, gbc); // Añadir el panel de botones al panel principal
 
         // Configuración general del panel principal
@@ -74,8 +91,8 @@ public class GamePanel extends JPanel {
 
         // Configuración del área de texto para la pregunta
         questionLabel = new JTextArea("¿La tierra es plana?"); // Pregunta predeterminada
-        questionLabel.setLineWrap(true); // Ajustar texto en líneas
-        questionLabel.setWrapStyleWord(true); // Ajustar líneas por palabras
+        questionLabel.setLineWrap(false); // Desactivar ajuste de líneas
+        questionLabel.setWrapStyleWord(false); // Desactivar ajuste por palabras
         questionLabel.setEditable(false); // Área de texto no editable
         questionLabel.setFont(new Font("Montserrat", Font.PLAIN, 24)); // Fuente del texto
         questionLabel.setForeground(Color.WHITE); // Texto en blanco
@@ -120,5 +137,4 @@ public class GamePanel extends JPanel {
     public JTextArea getQuestionLabel() {
         return questionLabel; // Devolver área de texto de la pregunta
     }
-
 }
