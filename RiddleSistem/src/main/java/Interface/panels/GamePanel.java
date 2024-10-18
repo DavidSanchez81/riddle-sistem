@@ -47,7 +47,7 @@ public class GamePanel extends JPanel {
 
         // Añadir área de texto para la pregunta
         JScrollPane scrollPane = new JScrollPane(questionLabel); // Envolver el área de texto en un JScrollPane
-        scrollPane.setPreferredSize(new Dimension(400, 100)); // Ajustar tamaño de la pregunta
+        scrollPane.setPreferredSize(new Dimension(400, 110)); // Ajustar tamaño de la pregunta
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Añadir borde negro
         gbc.gridy = 2; // Posicionar área de texto en la tercera fila
         gbc.insets = new Insets(4, 10, 5, 10); // Ajustar los márgenes
