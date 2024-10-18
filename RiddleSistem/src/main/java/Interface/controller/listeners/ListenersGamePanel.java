@@ -4,12 +4,10 @@ import Interface.controller.ViewController;
 import model.BinaryTree;
 import model.ManagementPersistence;
 import model.Node;
-import view.Main;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-
 import javax.swing.*;
+
 public class ListenersGamePanel {
     private final ViewController viewController;
     private BinaryTree binaryTree;
@@ -19,16 +17,15 @@ public class ListenersGamePanel {
         this.viewController = viewController;
         this.binaryTree = new ManagementPersistence().loadTree(); // Cargar el árbol binario desde JSON
         this.currentNode = binaryTree.getRoot(); // Inicializar con la raíz del árbol
-        addListeners();
+        addListeners(); //Inicializar los listeners
         startGame(); // Mostrar la pregunta inicial del nodo raíz
     }
 
-    // Añadir listeners a los botones "Sí" y "No"
+    // Añadir listeners a los botones "Si" y "No"
     private void addListeners() {
         viewController.getMainPanel().getGamePanel().getBotonSi().addActionListener(e -> {
             handleAnswer(true); // Manejar respuesta "Sí"
         });
-
         viewController.getMainPanel().getGamePanel().getBotonNo().addActionListener(e -> {
             handleAnswer(false); // Manejar respuesta "No"
         });
@@ -43,15 +40,14 @@ public class ListenersGamePanel {
         }
     }
 
-    // Manejar la respuesta del usuario y avanzar en el árbol
+    // Manejar la respuesta del usuario y avanzar en el arbol
     private void handleAnswer(boolean isYes) {
         if (currentNode != null && !currentNode.isAnswer()) {
             // Avanzar al nodo siguiente basado en la respuesta
             currentNode = isYes ? currentNode.getYes() : currentNode.getNo();
-
             // Verificar si el nodo siguiente es una respuesta
             if (currentNode.isAnswer()) {
-                // Mostrar la respuesta final basada en si se adivinó correctamente o no
+                // Mostrar la respuesta final basada en si se adivino correctamente o no
                 showFinalAnswer(isYes);
             } else {
                 // Si no es una respuesta, mostrar la nueva pregunta
@@ -70,11 +66,11 @@ public class ListenersGamePanel {
         if (currentNode != null && currentNode.isAnswer()) {
             if (isYes) {
                 // El jugador ha confirmado que adivinamos correctamente el animal
-                JOptionPane.showMessageDialog(null, "¡Se ha  adivinado el animal! : " + currentNode.getAnswer(), "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px; color:green;'>¡ Se adivino el animal con exito ! : " + currentNode.getAnswer() + "</p></html>", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 resetGame(); // Reiniciar el juego después de adivinar correctamente
             } else {
                 // El jugador ha indicado que no adivinamos correctamente el animal
-                JOptionPane.showMessageDialog(null, "No se ha podido adivinar el animal. Cambiando al panel de agregar.", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px;'>No se ha podido adivinar el animal , cambiando al panel de añadir...</p></html>", "Fallo", JOptionPane.ERROR_MESSAGE);
                 changeVisibility(); // Cambiar al panel de agregar nuevo animal
             }
         } else {
@@ -106,31 +102,47 @@ public class ListenersGamePanel {
                 binaryTree.printTree();
             }
         });
+        listenerAddPanel();
+    }
 
+
+    private void listenerAddPanel(){
         // Añadir listener al botón de aceptar del panel de agregar
         viewController.getMainPanel().getAddPanel().getAcceptButton().addActionListener(e -> {
-           String animal = viewController.getMainPanel().getAddPanel().getAnimalField().getText().toLowerCase().trim();
-           String question = viewController.getMainPanel().getAddPanel().getQuestionField().getText().toLowerCase().trim();
-           if(animal.isEmpty()||question.isEmpty()){
-               JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px;'>Por favor rellene todos los campos.</p></html>", "Error", JOptionPane.ERROR_MESSAGE);
-           }else {
-               // Crear nuevos nodos para la pregunta y el nuevo animal
-               Node newAnimalNode = new Node(animal,true);
-               Node currentAnimalNode = new Node(currentNode.getAnswer(),true);
+            //Extraer los textos actuales de los field
+            String animal = viewController.getMainPanel().getAddPanel().getAnimalField().getText().toLowerCase().trim();
+            String question = viewController.getMainPanel().getAddPanel().getQuestionField().getText().toLowerCase().trim();
+            if(animal.isEmpty()||question.isEmpty()){ //Verificar que tengan contenido
+                JOptionPane.showMessageDialog(null, "<html><p style='font-size:14px;'>Por favor rellene todos los campos.</p></html>", "Error", JOptionPane.ERROR_MESSAGE);
+            }else {
+                // Crear nuevos nodos para la pregunta y el nuevo animal
+                Node newAnimalNode = new Node(animal,true);
+                Node currentAnimalNode = new Node(currentNode.getAnswer(),true);
+                // Actualizar la estructura del árbol
+                currentNode.setAnswer(null);
+                currentNode.setYes(newAnimalNode);
+                currentNode.setNo(currentAnimalNode);
+                currentNode.setQuestion(question);
+                // Reiniciar el juego después de agregar el nuevo animal
+                JOptionPane.showMessageDialog(null, "Informacion guardada con exito . Reiniciando el juego...", "Información", JOptionPane.INFORMATION_MESSAGE);
+                viewController.getMainPanel().getAddPanel().getAnimalField().setText("");
+                viewController.getMainPanel().getAddPanel().getQuestionField().setText("");
+                viewController.getMainPanel().getAddPanel().setVisible(false);
+                viewController.getMainPanel().getGamePanel().setVisible(true);
+                resetGame(); // Reiniciar el juego
+            }
+        });
+        listenerCancelButton();
+    }
 
-               // Actualizar la estructura del árbol
-               currentNode.setAnswer(null);
-               currentNode.setYes(newAnimalNode);
-               currentNode.setNo(currentAnimalNode);
-               currentNode.setQuestion(question);
-               // Reiniciar el juego después de agregar el nuevo animal
-               JOptionPane.showMessageDialog(null, "Informacion guardada con exito . Reiniciando el juego...", "Información", JOptionPane.INFORMATION_MESSAGE);
-               viewController.getMainPanel().getAddPanel().getAnimalField().setText("");
-               viewController.getMainPanel().getAddPanel().getQuestionField().setText("");
-               viewController.getMainPanel().getAddPanel().setVisible(false);
-               viewController.getMainPanel().getGamePanel().setVisible(true);
-               resetGame(); // Reiniciar el juego
-           }
+    private void listenerCancelButton(){
+        viewController.getMainPanel().getAddPanel().getCancelButton().addActionListener(e -> {
+            viewController.getMainPanel().getAddPanel().getAnimalField().setText("");
+            viewController.getMainPanel().getAddPanel().getQuestionField().setText("");
+            resetGame(); // Reiniciar el juego
+            viewController.getMainPanel().getAddPanel().setVisible(false);
+            viewController.getMainPanel().getGamePanel().setVisible(true);
         });
     }
+
 }
