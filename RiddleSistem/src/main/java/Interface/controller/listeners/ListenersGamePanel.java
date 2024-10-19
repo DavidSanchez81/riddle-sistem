@@ -12,6 +12,7 @@ public class ListenersGamePanel {
     private final ViewController viewController;
     private final BinaryTree binaryTree;
     private Node currentNode;
+    private ManagementPersistence mp = new ManagementPersistence();
 
     public ListenersGamePanel(ViewController viewController) {
         this.viewController = viewController;
@@ -131,6 +132,7 @@ public class ListenersGamePanel {
                 currentNode.setYes(newAnimalNode);
                 currentNode.setNo(currentAnimalNode);
                 currentNode.setQuestion(question);
+                mp.saveTree(binaryTree);
 
                 // Reiniciar el juego después de agregar el nuevo animal
                 JOptionPane.showMessageDialog(null, "Información guardada con éxito. Reiniciando el juego...", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -150,6 +152,7 @@ public class ListenersGamePanel {
         if (texto == null || texto.isEmpty()) {
             return false; // Devuelve false si el texto es nulo o vacío
         }
+        //return texto.trim().startsWith("¿") && texto.trim().endsWith("?")
         return texto.trim().endsWith("?"); // Devuelve true si termina con '?'
     }
     private void listenerCancelButton(){
